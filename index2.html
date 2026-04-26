@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>个人简历 | Chen</title>
+  <style>
+    :root {
+      --bg: #eef3f8;
+      --panel: #ffffff;
+      --brand: #4970a2;
+      --brand-strong: #1f4f8c;
+      --brand-light: #6d8fd1;
+      --brand-soft: #e3edf9;
+      --text: #1d2939;
+      --muted: #52606d;
+      --line: #d8e1eb;
+      --accent: #a361f4;
+      --green: #4c9a7d;
+      --shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+      --shadow-hover: 0 16px 36px rgba(31, 79, 140, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      background:
+        radial-gradient(circle at 8% 10%, rgba(130, 167, 230, 0.2), transparent 34%),
+        radial-gradient(circle at 90% 85%, rgba(163, 97, 244, 0.14), transparent 28%),
+        linear-gradient(165deg, #f7fbff 0%, #edf3f9 45%, #f9fbfd 100%);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: -1;
+      filter: blur(2px);
+    }
+
+    body::before {
+      width: 290px;
+      height: 290px;
+      top: -80px;
+      right: -70px;
+      background: radial-gradient(circle at 35% 35%, rgba(89, 142, 230, 0.42), rgba(89, 142, 230, 0.06));
+      animation: driftOne 11s ease-in-out infinite;
+    }
+
+    body::after {
+      width: 240px;
+      height: 240px;
+      left: -80px;
+      bottom: -70px;
+      background: radial-gradient(circle at 35% 35%, rgba(163, 97, 244, 0.26), rgba(163, 97, 244, 0.05));
+      animation: driftTwo 10s ease-in-out infinite;
+    }
+
+    a {
+      text-decoration: none;
+      color: var(--brand);
+      font-weight: 600;
+      transition: color 0.25s ease;
+    }
+
+    a:hover {
+      color: var(--brand-strong);
+    }
+
+    .container {
+      width: 960px;
+      margin: 0 auto;
+    }
+
+    .head {
+      position: fixed;
+      top: 0;
+      z-index: 999;
+      width: 100%;
+      background: linear-gradient(100deg, rgba(22, 67, 122, 0.95), rgba(54, 97, 174, 0.95));
+      backdrop-filter: blur(6px);
+      box-shadow: 0 10px 24px rgba(31, 79, 140, 0.24);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .head::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -40%;
+      width: 40%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.24), transparent);
+      animation: navShine 7s ease-in-out infinite;
+    }
+
+    .head-inner {
+      height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #fff;
+    }
+
+    .head h1 {
+      margin: 0;
+      font-size: 26px;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+    }
+
+    .head nav {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .head nav a {
+      color: #fff;
+      opacity: 0.95;
+      font-size: 14px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .head nav a::after {
+      content: "";
+      position: absolute;
+      left: 10px;
+      right: 10px;
+      bottom: 4px;
+      height: 2px;
+      background: #fff;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.28s ease;
+    }
+
+    .head nav a:hover {
+      background: rgba(255, 255, 255, 0.16);
+      color: #fff;
+    }
+
+    .head nav a:hover::after {
+      transform: scaleX(1);
+    }
+
+    .content {
+      padding-top: 100px;
+      padding-bottom: 28px;
+      animation: riseIn 0.7s ease;
+    }
+
+    .layout {
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+    }
+
+    .left {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .right {
+      width: 280px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-self: flex-start;
+      position: sticky;
+      top: 106px;
+    }
+
+    .card {
+      background-color: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 16px 18px;
+      box-shadow: var(--shadow);
+      transition: transform 0.32s ease, box-shadow 0.32s ease, border-color 0.32s ease;
+      animation: cardIn 0.7s ease both;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-hover);
+      border-color: #c7d6ea;
+    }
+
+    .left .card:nth-of-type(1) {
+      animation-delay: 0.04s;
+    }
+
+    .left .card:nth-of-type(2) {
+      animation-delay: 0.1s;
+    }
+
+    .left .card:nth-of-type(3) {
+      animation-delay: 0.16s;
+    }
+
+    .left .card:nth-of-type(4) {
+      animation-delay: 0.22s;
+    }
+
+    .right .card:nth-of-type(1) {
+      animation-delay: 0.12s;
+    }
+
+    .right .card:nth-of-type(2) {
+      animation-delay: 0.2s;
+    }
+
+    .hero {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      background: linear-gradient(120deg, #ffffff 0%, #eef5ff 100%);
+      border: 1px solid #d7e3f4;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      right: -60px;
+      top: -90px;
+      border-radius: 50%;
+      background: radial-gradient(circle at center, rgba(109, 143, 209, 0.2), rgba(109, 143, 209, 0));
+    }
+
+    .avatar {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--brand-soft);
+      box-shadow: 0 10px 24px rgba(73, 112, 162, 0.22);
+      animation: floatAvatar 4.5s ease-in-out infinite;
+    }
+
+    .hero-info h2 {
+      margin: 0;
+      color: var(--brand);
+      font-size: 24px;
+    }
+
+    .hero-info p {
+      margin: 8px 0 0;
+      color: var(--muted);
+    }
+
+    h3 {
+      margin: 0 0 12px;
+      color: var(--brand);
+      border-left: 4px solid var(--accent);
+      padding-left: 8px;
+      font-size: 18px;
+      transition: color 0.28s ease;
+    }
+
+    .card:hover h3 {
+      color: var(--brand-strong);
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 20px;
+      line-height: 1.9;
+      color: #3c4f66;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 10px;
+      background: #fff;
+    }
+
+    th,
+    td {
+      border: 1px solid var(--line);
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background: var(--brand-soft);
+    }
+
+    tr {
+      transition: background-color 0.25s ease;
+    }
+
+    tr:hover {
+      background-color: #f6faff;
+    }
+
+    ol {
+      margin: 0;
+      padding-left: 20px;
+      line-height: 1.9;
+      color: #3c4f66;
+    }
+
+    .float-photo {
+      width: 96px;
+      height: 96px;
+      object-fit: cover;
+      float: left;
+      border-radius: 10px;
+      margin: 0 12px 8px 0;
+      border: 3px solid #d7e6fa;
+    }
+
+    .summary {
+      line-height: 1.85;
+      color: #324455;
+    }
+
+    .summary::after {
+      content: "";
+      display: block;
+      clear: both;
+    }
+
+    .skill-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .skill-grid span {
+      display: block;
+      text-align: center;
+      background: linear-gradient(180deg, #f8fbff, #eef4fd);
+      color: #2f4358;
+      border-radius: 8px;
+      padding: 8px;
+      border: 1px solid #d9e4f2;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+
+    .skill-grid span:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 14px rgba(73, 112, 162, 0.14);
+      border-color: #b6cae7;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid #d8e1eb;
+      background: #f7fafc;
+      font-size: 13px;
+      color: #3f4e5f;
+      transition: transform 0.25s ease, background-color 0.25s ease, color 0.25s ease;
+    }
+
+    .tag:hover {
+      background: #ecf4ff;
+      color: var(--brand-strong);
+      transform: translateY(-3px);
+    }
+
+    .contact {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      line-height: 2;
+      color: #364a5f;
+    }
+
+    .contact li {
+      border-bottom: 1px dashed #d9e4f2;
+      padding: 2px 0;
+    }
+
+    .contact li:last-child {
+      border-bottom: 0;
+    }
+
+    .footer {
+      margin: 14px auto 0;
+      color: #5f6f81;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .go-top {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--green);
+      color: #fff;
+      font-size: 12px;
+      box-shadow: 0 8px 16px rgba(76, 154, 125, 0.3);
+      z-index: 999;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      animation: pulse 2.8s ease-in-out infinite;
+    }
+
+    .go-top:hover {
+      transform: translateY(-3px) scale(1.04);
+      box-shadow: 0 14px 22px rgba(76, 154, 125, 0.34);
+      color: #fff;
+    }
+
+    .quick-fixed {
+      position: fixed;
+      right: 20px;
+      bottom: 78px;
+      height: 36px;
+      min-width: 84px;
+      border-radius: 999px;
+      background: linear-gradient(100deg, var(--brand-strong), var(--brand-light));
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 600;
+      box-shadow: 0 10px 18px rgba(73, 112, 162, 0.32);
+      z-index: 999;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .quick-fixed:hover {
+      transform: translateX(-4px);
+      box-shadow: 0 14px 22px rgba(73, 112, 162, 0.36);
+      color: #fff;
+    }
+
+    @keyframes driftOne {
+      0%,
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      50% {
+        transform: translate(-16px, 18px) scale(1.05);
+      }
+    }
+
+    @keyframes driftTwo {
+      0%,
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      50% {
+        transform: translate(14px, -12px) scale(1.04);
+      }
+    }
+
+    @keyframes riseIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes cardIn {
+      from {
+        opacity: 0;
+        transform: translateY(14px) scale(0.99);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes floatAvatar {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-6px);
+      }
+    }
+
+    @keyframes pulse {
+      0%,
+      100% {
+        box-shadow: 0 8px 16px rgba(76, 154, 125, 0.3);
+      }
+
+      50% {
+        box-shadow: 0 12px 24px rgba(76, 154, 125, 0.42);
+      }
+    }
+
+    @keyframes navShine {
+      0% {
+        left: -45%;
+      }
+
+      45%,
+      100% {
+        left: 130%;
+      }
+    }
+
+    @media (max-width: 1100px) {
+      .container {
+        width: 92%;
+      }
+    }
+
+    @media (max-width: 960px) {
+      .head-inner {
+        height: auto;
+        padding: 12px 0;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+
+      .content {
+        padding-top: 126px;
+      }
+
+      .layout {
+        flex-direction: column;
+      }
+
+      .right {
+        width: 100%;
+        position: static;
+      }
+
+      .hero {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .avatar {
+        width: 112px;
+        height: 112px;
+      }
+
+      .float-photo {
+        float: none;
+        margin: 0 0 12px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .head h1 {
+        font-size: 22px;
+      }
+
+      .head nav {
+        gap: 8px;
+      }
+
+      .head nav a {
+        padding: 5px 8px;
+      }
+
+      .content {
+        padding-top: 140px;
+      }
+
+      .card {
+        padding: 14px;
+      }
+
+      h3 {
+        font-size: 17px;
+      }
+
+      .go-top {
+        width: 42px;
+        height: 42px;
+        right: 14px;
+        bottom: 14px;
+      }
+
+      .quick-fixed {
+        display: none;
+      }
+
+      body::before {
+        width: 210px;
+        height: 210px;
+      }
+
+      body::after {
+        width: 180px;
+        height: 180px;
+      }
+    }
+  </style>
+</head>
+<body id="top">
+  <header class="head">
+    <div class="container head-inner">
+      <h1>个人简历</h1>
+      <nav>
+        <a href="./form.html">填写简历</a>
+        <a href="../lesson4/lesson4/flex2.html" target="_blank">复现学校网站</a>
+        <a href="#education">教育背景</a>
+        <a href="#work">工作经历</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="content">
+    <div class="container layout">
+      <section class="left">
+        <article class="card hero">
+          <img class="avatar" src="351ef49f4c92fa0a548fa69b4447979.jpg" alt="Chen">
+          <div class="hero-info">
+            <h2>Chen</h2>
+            <p>计算机科学与技术 | 软件开发方向</p>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>个人信息</h3>
+          <ul>
+            <li><strong>性别：</strong>女</li>
+            <li><strong>年龄：</strong>22</li>
+            <li><strong>学历：</strong>本科</li>
+            <li><strong>专业：</strong>计算机科学与技术</li>
+          </ul>
+          <p class="summary">
+            具备扎实的前端基础，熟悉 HTML、CSS 和 JavaScript，能够独立完成响应式页面开发。
+            对页面布局与交互体验有较高关注，能够结合 flex、grid、float 等布局方式进行设计
+          </p>
+        </article>
+
+        <article class="card" id="education">
+          <h3>教育背景</h3>
+          <table>
+            <tr>
+              <th>时间</th>
+              <th>学校</th>
+              <th>专业</th>
+            </tr>
+            <tr>
+              <td>2018-2022</td>
+              <td>suibe</td>
+              <td>计算机科学与技术</td>
+            </tr>
+          </table>
+        </article>
+
+        <article class="card" id="work">
+          <h3>工作经历</h3>
+          <ol>
+            <li>2022-2023：小米公司，软件开发工程师</li>
+            <li>2023-至今：华为公司，软件开发工程师</li>
+          </ol>
+        </article>
+      </section>
+
+      <aside class="right">
+        <article class="card">
+          <h3>联系方式</h3>
+          <ul class="contact">
+            <li>电话：1568456566659</li>
+            <li>邮箱：chen@1837234261.com</li>
+            <li>地址：shangahi</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>技能</h3>
+          <div class="skill-grid">
+            <span>HTML5</span>
+            <span>CSS3</span>
+            <span>JavaScript</span>
+            <span>Flex</span>
+            <span>Grid</span>
+            <span>Git</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>个人标签</h3>
+          <div class="tag-list">
+            <span class="tag">责任心强</span>
+            <span class="tag">沟通顺畅</span>
+            <span class="tag">快速学习</span>
+            <span class="tag">注重细节</span>
+          </div>
+        </article>
+      </aside>
+    </div>
+
+    <div class="container footer">
+    </div>
+  </main>
+
+  <a class="quick-fixed" href="mailto:chen@1837234261.com">联系我</a>
+  <a class="go-top" href="#top">TOP</a>
+</body>
+</html>
