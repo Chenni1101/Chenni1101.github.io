@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>flex2</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f4f6fa;
+            font-family: "Microsoft YaHei", sans-serif;
+            color: #1f2a44;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: 80%;
+        }
+
+        .header {
+            display: flex;
+            justify-content: center;
+            background-color: #c6d8ff;
+            margin-bottom: 10px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 9999;
+            box-shadow: 0 2px 8px rgba(28, 129, 166, 0.2);
+        }
+
+        .header .container {
+            min-height: 52px;
+            background-color: #3761bd;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 12px;
+            color: #fff;
+        }
+
+        .brand {
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .nav {
+            display: flex;
+            gap: 16px;
+            font-size: 14px;
+        }
+
+        .main {
+            margin-top: 62px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .main .container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .left {
+            flex: auto;
+            min-height: 900px;
+            background-color: #dce8ff;
+            margin-bottom: 10px;
+            margin-right: 10px;
+            padding: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-content: flex-start;
+        }
+
+        .banner {
+            width: 100%;
+            height: 160px;
+            background: linear-gradient(120deg, #aec6f6, #3766bd);
+            border-radius: 6px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .avgcard {
+            width: calc(50% - 5px);
+            min-height: 120px;
+            background-color: #ffffff;
+            border-radius: 6px;
+            border: 1px solid #cfd9ec;
+            padding: 12px;
+            box-sizing: border-box;
+        }
+
+        .avgcard h3 {
+            margin: 0 0 8px;
+            font-size: 16px;
+            color: #6810ac;
+        }
+
+        .avgcard p {
+            margin: 0;
+            font-size: 13px;
+            color: #4d5f80;
+            line-height: 1.6;
+        }
+
+        .right {
+            display: flex;
+            flex-direction: column;
+            width: 260px;
+        }
+
+        .card {
+            background-color: #83f0ad;
+            margin-bottom: 10px;
+            position: relative;
+            border-radius: 6px;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .card.notice {
+            height: 240px;
+            background-color: #b7f7cd;
+        }
+
+        .card.link {
+            height: 190px;
+            background-color: #d7f9e5;
+        }
+
+        .card h3 {
+            margin: 0 0 10px;
+            font-size: 16px;
+            color: #215434;
+        }
+
+        .card ul {
+            margin: 0;
+            padding-left: 18px;
+            color: #24553a;
+            font-size: 13px;
+            line-height: 1.9;
+        }
+
+        .linkbox {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .linkbox a {
+            width: calc(50% - 4px);
+            background-color: #f7fffb;
+            border: 1px solid #9edcbc;
+            border-radius: 4px;
+            text-align: center;
+            padding: 8px 0;
+            font-size: 13px;
+            color: #185136;
+        }
+
+        .footer {
+            background-color: #7d7d7e;
+            display: flex;
+            justify-content: center;
+        }
+
+        .footer .container {
+            background-color: #313131;
+            min-height: 44px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+
+        .goback {
+            width: 40px;
+            height: 40px;
+            background-color: #313131;
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .circle {
+            height: 62px;
+            width: 62px;
+            background-color: #eea6ca;
+            position: absolute;
+            right: 10px;
+            top: -20px;
+            z-index: 99;
+            border-radius: 50%;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        @media (max-width: 900px) {
+            .main .container {
+                flex-direction: column;
+            }
+
+            .left {
+                margin-right: 0;
+                min-height: auto;
+            }
+
+            .right {
+                width: 100%;
+            }
+
+            .card.notice,
+            .card.link {
+                height: auto;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                width: 92%;
+            }
+
+            .header .container {
+                flex-direction: column;
+                justify-content: center;
+                gap: 6px;
+                padding: 8px 12px;
+            }
+
+            .main {
+                margin-top: 96px;
+            }
+
+            .avgcard {
+                width: 100%;
+            }
+
+            .nav {
+                gap: 10px;
+                font-size: 13px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header" id="top">
+        <div class="container">
+            <div class="brand">suibe官网</div>
+            <div class="nav">
+                <a href="#">首页</a>
+                <a href="#">学校新闻</a>
+                <a href="#">招生信息</a>
+                <a href="#">校园活动</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="main">
+        <div class="container">
+            <div class="left">
+                <div class="banner">2026校园文化节</div>
+
+                <div class="avgcard">
+                    <h3>新闻1</h3>
+                </div>
+                <div class="avgcard">
+                    <h3>新闻2</h3>
+                </div>
+                <div class="avgcard">
+                    <h3>新闻3</h3>
+                </div>
+                <div class="avgcard">
+                    <h3>新闻4</h3>
+                </div>
+            </div>
+
+            <div class="right">
+                <div class="card notice">
+                    <div class="circle">HOT</div>
+                    <h3>通知</h3>
+                    <ul>
+                        <li>学校举行党委理论学习中心组（扩大）学习会暨处级以上领导干部树立和践行正确政绩观专题培训会</li>
+                        <li>校长汪荣明一行访问国元证券</li>
+                        <li>学校树立和践行正确政绩观学习教育读书班聚焦 “务实”主题开展第二次集体学习</li>
+                        <li>赓续入世薪火，构筑育人厚土——2026年“入世薪传廿五载，经世力行育新人”大师精神建设年启动暨“经贸智韵阁”揭牌仪式顺利举行</li>
+                    </ul>
+                </div>
+
+                <div class="card link">
+                    <h3>快速入口</h3>
+                    <div class="linkbox">
+                        <a href="#">校园要闻</a>
+                        <a href="#">新闻快讯</a>
+                        <a href="#">媒体报道</a>
+                        <a href="#">科研动态</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="container"></div>
+    </div>
+
+    <a href="#top" class="goback">顶部</a>
+</body>
+
+</html>
